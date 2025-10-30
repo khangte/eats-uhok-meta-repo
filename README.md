@@ -1,35 +1,36 @@
-# 📌 서비스 개요
+# Eat’s 유혹(Uhok)
 
-## 프로젝트명
-**Eat’s 유혹(Uhok)**
+## 📌 서비스 개요
 
-## 프로젝트 기간
+### 프로젝트 기간
 2025.07.23 - 09.12 (발표 09.13)
 
-## 팀원 소개
+### 팀원 소개
 ![image/팀원소개.png](image/팀원소개_3.png)
 
-## 기술 스택
+### 기술 스택
 
-### 프론트엔드
+#### 프론트엔드
 <img src="https://img.shields.io/badge/react-61DAFB?style=for-the-badge&logo=react&logoColor=white"> <img src="https://img.shields.io/badge/html5-E34F26?style=for-the-badge&logo=html5&logoColor=white"> <img src="https://img.shields.io/badge/css-663399?style=for-the-badge&logo=css&logoColor=white">
 
-### 백엔드
+#### 백엔드
 <img src="https://img.shields.io/badge/python-3776AB?style=for-the-badge&logo=python&logoColor=white"> <img src="https://img.shields.io/badge/fastapi-009688?style=for-the-badge&logo=fastapi&logoColor=white"> <img src="https://img.shields.io/badge/redis-DC382D?style=for-the-badge&logo=redis&logoColor=white"> <img src="https://img.shields.io/badge/sqlalchemy-D71F00?style=for-the-badge&logo=redis&logoColor=white"> 
 
-### 데이터 수집
+#### 데이터 수집
 <img src="https://img.shields.io/badge/Apache%20Airflow-017CEE?style=flat-square&logo=Apache%20Airflow&logoColor=white"> <img src="https://img.shields.io/badge/Requests-bada55?style=flat&logo=Python&logoColor=white"/><img src="https://img.shields.io/badge/BeautifulSoup4-d97453?style=flat&logo=Python&logoColor=white"/><img src="https://img.shields.io/badge/Playwright-afbb00?style=flat&logo=Python&logoColor=white"/> 
 
-### 데이터베이스
+#### 데이터베이스
 <img src="https://img.shields.io/badge/mariadb-003545?style=for-the-badge&logo=mariadb&logoColor=white"> <img src="https://img.shields.io/badge/postgresql-316192?style=for-the-badge&logo=postgresql&logoColor=white"> <img src="https://img.shields.io/badge/pgvector-336791?style=for-the-badge&logo=postgresql&logoColor=white"> <img src="https://img.shields.io/badge/Pymysql-fc7773?style=flat&logo=Python&logoColor=white"/><img src="https://img.shields.io/badge/Psycopg-ef9c89?style=flat&logo=Python&logoColor=white"/>
 
-### 분석 알고리즘
+#### 분석 알고리즘
 <img src="https://img.shields.io/badge/sbert-336791?style=for-the-badge&logo=sbert&logoColor=white"> <img src="https://img.shields.io/badge/SentenceTransformer-92dc8d?style=flat&logo=Python&logoColor=white"/> <img src="https://img.shields.io/badge/LinearSVM-6de885?style=flat&logo=Python&logoColor=white"/>
 
-### 배포
+#### 배포
 <img src="https://img.shields.io/badge/nginx-009639?style=for-the-badge&logo=nginx&logoColor=white"> <img src="https://img.shields.io/badge/docker-2496ED?style=for-the-badge&logo=docker&logoColor=white"> <img src="https://img.shields.io/badge/amazonaws-232F3E?style=for-the-badge&logo=amazonaws&logoColor=white">
 
-## 필요성 (NEEDS)
+### NABC
+
+#### 필요성 (NEEDS)
 - **고객 단절:** 홈쇼핑(40 ~ 60대)과 쇼핑몰(20 ~ 40대) 고객층 분리 → 충성 고객 단절  
 - **단발성·이탈:** 첫 유입 후 단발성 소비, 재방문·반복구매 트리거 부족  
 - **시장 볼륨**  
@@ -38,7 +39,7 @@
   - 전자상거래(식품): 4,601억 달러(약 664조 원)  
 - **경쟁 구도:** 쿠팡·G마켓 등 범용 채널 대비 차별화 필요  
 
-## 제안 솔루션 (Approach)
+#### 제안 솔루션 (Approach)
 - **식품 특화 전략:** U+TV 17개 홈쇼핑사 편성 데이터 + U+콕 쇼핑몰 데이터 연동  
 - **원스텝 전환:** 실시간 방송 시청 → 즉시 구매 흐름 제공  
 - **개인화 추천:**  
@@ -46,26 +47,41 @@
   - 식재료 추천 (레시피 ↔ 홈쇼핑/쇼핑몰 상품 자동 매칭 + 유사/대체 상품 제안)  
 - **구매 편의:** 홈쇼핑 대량 패키지 부담 ↓ + 쇼핑몰 소량/보충 구매 연결  
 
-## 이점 (Benefit)
+#### 이점 (Benefit)
 - **기업 측:** 매출 및 전환율 증가, 충성도 강화, 경쟁력 확보, 신규 고객 유입  
 - **소비자 측:** 메뉴·구매 고민 해소, 개인화 추천 경험, 레시피–방송–구매 원스톱 연계  
 
-## 경쟁력 (Competition)
+#### 경쟁력 (Competition)
 - ‘식품’ 카테고리 초집중 + 실시간 편성 반영  
 - 레시피–커머스 완전 통합 (레시피 ↔ 재료 ↔ 상품 자동 연결)  
 - 알림 기반 재방문·재구매 유도  
 - 개인화 추천 (찜/장바구니/시청·구매 이력 활용)  
 - 광고 최소화 + 직관적 UI/UX 제공  
 
-## 프로젝트 일정(WBS)
-[docs/제출 자료/02 WBS.xlsx](<docs/제출 자료/02 WBS.xlsx>)
 
-## 시스템 아키텍쳐
+## 프로젝트 관리 산출물
 
-### 현재
+### 프로젝트 일정(WBS)
+![alt text](image/wbs_image.png)
+
+### API 명세
+![alt text](image/API_specification_image.png)
+
+
+## 아키텍처 & 설계 산출물
+
+### 서비스 플로우
+![alt text](image/flow_chart.png)
+
+### ERD
+![alt text](image/ERD_IMAGE.png)
+
+### 시스템 아키텍쳐
+
+#### 현재
 ![alt text](image/SystemArchitecture_Real.png)
 
-### 추후
+#### 추후
 ![alt text](image/SystemArchitecture_Ideal.png)
 
 
@@ -74,69 +90,71 @@
 
 ---
 
-# 📌 서비스 소개
+## 📌 서비스 소개
 
-## 서비스 시연 영상
+### 서비스 시연 영상
 [![YouTube](https://img.shields.io/badge/YouTube-Eat'sUhok%20서비스시연%20영상-FF0000?logo=youtube&logoColor=white)](https://www.youtube.com/watch?v=3ETDQL5bWG0)
 
-## 서비스 개념
+### 서비스 개념
 - 홈쇼핑(U+TV)과 쇼핑몰(U+콕)을 연계한 식재료 상품 및 레시피 추천 웹 애플리케이션  
 - 찜/장바구니 상품과 연계된 홈쇼핑 방송 알림, 레시피 추천, 관련 상품 구매 연결 제공  
 - **슬로건:** “당신이 흥한 상품 → 관련 상품으로 유혹하겠다”  
 
-## 핵심 기능 (Core Features)
-### 홈쇼핑–쇼핑몰 연계 추천
+### 핵심 기능 (Core Features)
+#### 홈쇼핑–쇼핑몰 연계 추천
 - 홈쇼핑(U+TV) ↔ U+콕 쇼핑몰 간 유사/대체 상품 자동 매칭  
 - 찜/장바구니 기반으로 방송 알림 제공
 - ![홈쇼핑 편성표_디폴트.png](image/편성표_디폴트.png)
 
-### 레시피 기반 개인화 추천
+#### 레시피 기반 개인화 추천
 - 키워드/보유 재료/시청·구매 이력 기반 맞춤형 레시피 추천  
 - 레시피에서 필요한 식재료 ↔ 즉시 구매 연결 
 - ![레시피 결과 리스트.png](<image/레시피 결과 리스트.png>)
 - ![레시피 추천 상품.png](<image/레시피 추천 상품.png>)
 
-### 통합 검색 기능
+#### 통합 검색 기능
 - 홈쇼핑 방송 상품 + U+콕 쇼핑몰 상품을 동시에 탐색  
 - 시간대/카테고리/재료 필터링 가능  
 
-### 원스텝 쇼핑 경험
+#### 원스텝 쇼핑 경험
 - 방송 시청 → 레시피 확인 → 식재료 선택 → 즉시 구매까지 한 흐름으로 연결  
 
-## 보조 기능 (Supporting Features)
-### 방송 알림 & 푸시 알림
+### 보조 기능 (Supporting Features)
+#### 방송 알림 & 푸시 알림
 - 관심 품목 방송 편성 시 알림 제공  
 - 재방문 및 반복 구매 유도  
 
-### 구매 편의 기능
+#### 구매 편의 기능
 - 홈쇼핑 대량 패키지 부담 ↓ → 쇼핑몰에서 소량/보충 구매 연결  
 - 장바구니·찜 기능 강화  
 
-### UI/UX 최적화
+#### UI/UX 최적화
 - 모바일 중심 심플 UI (중장년층도 쉽게 사용)  
 - 과도한 광고 최소화 → 피로도 ↓  
 - ![콕 main.png](image/main.png)
 
-### 데이터 기반 개인화
+#### 데이터 기반 개인화
 - 찜/장바구니/시청·구매 이력 분석  
 - 맞춤형 상품 제안 및 대체품 추천  
 
 ---
 
-# 📌 서비스 전략 및 기대효과
+## 📌 서비스 전략 및 기대효과
 
-## 해결방안
+### 해결방안
 - 홈쇼핑 ↔ 쇼핑몰 간 양방향 연계 추천  
 - 장바구니/찜 내역 기반 방송 알림 제공  
 - 레시피 기반 맞춤형 추천 및 필요한 재료 자동 매칭  
 - 키워드 기반 통합 검색 + 모바일 친화적 UI/UX 제공  
 
-## 기대효과
+### 기대효과
 - **고객 시너지 강화:** 홈쇼핑 ↔ 쇼핑몰 교차 이용 촉진  
 - **신규 고객 유입:** 레시피·맞춤형 추천 관심 소비자 확보  
 - **재방문·재구매 유도:** 개인 맞춤형 알림·추천  
 - **편리한 쇼핑 경험:** 레시피 ↔ 구매 원스톱 제공  
 - **매출 증대:** 기존 고객 + 신규 고객 확보를 통한 매출 상승  
+
+---
 
 # 프로젝트 회고
 
