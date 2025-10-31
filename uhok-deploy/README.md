@@ -1,7 +1,7 @@
 # UHOK 배포 환경 (Docker Compose)
 
 UHOK 프로젝트의 전체 스택을 Docker Compose로 관리하는 배포 환경입니다. 
-백엔드, 프론트엔드, 임베딩 ML 서비스, Redis, Nginx를 포함한 마이크로서비스 아키텍처를 제공합니다.
+백엔드, 프론트엔드, 임베딩&벡터유사도계산 ML 서비스, Redis, Nginx를 포함한 마이크로서비스 아키텍처를 제공합니다.
 
 ## 📁 폴더 구조
 
@@ -10,7 +10,7 @@ uhok-deploy/
 ├── app/                            # 앱 서비스 (백엔드, 프론트엔드, Redis)
 │   ├── .env
 │   └── docker-compose.app.yml
-├── ml/                             # 임베딩 ML 서비스
+├── ml/                             # 임베딩&벡터유사도계산 ML 서비스
 │   └── docker-compose.ml.yml
 └── public/                         # 공개 서비스 (Nginx, 전체 통합)
 │   ├── .env
@@ -55,14 +55,14 @@ uhok-deploy/
 
 ### 공개 서비스 (public/)
 - **nginx** (nginx:1.25-alpine) - 리버스 프록시 및 로드 밸런서
-- **frontend** (uhok-frontend:3.0.0) - React 프론트엔드 애플리케이션
+- **frontend** (uhok-frontend) - React 프론트엔드 애플리케이션
 
 ### 앱 서비스 (app/)
-- **backend** (uhok-backend:2.0.2) - Python FastAPI 백엔드 서비스
+- **backend** (uhok-backend) - Python FastAPI 백엔드 서비스
 - **redis** (redis:7-alpine) - 캐시 및 세션 저장소 (프로필: `with-redis`)
 
 ### ML 서비스 (ml/)
-- **ml-inference** (uhok-ml-inference:1.2.0) - Python ML 서비스
+- **ml-inference** (uhok-ml-inference) - Python ML 서비스
 
 ## 🔧 빠른 시작
 
@@ -128,20 +128,20 @@ make up-nginx
 - **헬스체크**: `/api/health`
 - **환경변수**: `../uhok-backend/.env` 파일 사용
 - **의존성**: MariaDB, PostgreSQL (외부), Redis
-- **이미지**: uhok-backend:2.0.2
+- **이미지**: uhok-backend:latest
 
 ### Frontend (uhok-frontend)
 - **포트**: 80 (내부)
 - **빌드**: React 애플리케이션
 - **정적 파일**: Nginx를 통해 서빙
-- **이미지**: uhok-frontend:3.0.0
+- **이미지**: uhok-frontend:latest
 
 ### ML Inference (uhok-ml-inference)
 - **포트**: 8001 (외부 노출)
 - **헬스체크**: `/health`
 - **환경변수**: `../uhok-ml-inference/.env` 파일 사용
 - **역할**: 임베딩 모델 서비스
-- **이미지**: uhok-ml-inference:1.2.0
+- **이미지**: uhok-ml-inference:latest
 - **볼륨**: `ml_cache` (모델 캐시)
 
 ### Redis
