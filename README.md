@@ -79,7 +79,7 @@
 ![alt text](image/flow_chart.png)
 
 ### ERD
-![alt text](image/ERD_IMAGE.png)
+![alt text](image/ERD_image_white.png)
 
 ### 시스템 아키텍쳐
 
