@@ -12,8 +12,14 @@
 ### 프로젝트 기간
 2025.07.23 ~ 09.12 (발표 09.13)
 
-### 팀원 소개
+### 팀원
 ![팀원소개](images/docs/팀원소개_3.png)
+
+> #### 담당 Repo
+> - uhok-deploy
+> - uhok-backend
+> - uhok-ml-inference
+> - payment-server
 
 
 ## 기술 스택
