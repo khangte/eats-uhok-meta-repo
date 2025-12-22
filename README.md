@@ -9,17 +9,21 @@
 
 ![유혹스마트폰이미지](images/screenshots/스마트폰편집이미지.png)
 
-### 프로젝트 기간
+## 프로젝트 기간
 2025.07.23 ~ 09.12 (발표 09.13)
 
-### 팀원
-![팀원소개](images/docs/팀원%20소개_2.png)
+## 역할
+- 백엔드 API 설계·구현
+- MariaDB/ PostgreSQL 기반 서비스 DB 설계 
+- 외부 결제 연동 및 웹훅 수신 서버 구현
+- JMeter 성능 테스트 및 개선
+- AWS EC2 기반 배포 환경 구성(Docker, Nginx)
 
-> #### 담당 Repo
-> - uhok-deploy
-> - uhok-backend
-> - uhok-ml-inference
-> - payment-server
+## 담당 Repo
+- uhok-backend
+- uhok-deploy
+- uhok-ml-inference
+- payment-server
 
 
 ## 기술 스택
