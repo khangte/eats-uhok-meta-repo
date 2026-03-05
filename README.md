@@ -3,6 +3,24 @@
 [![YouTube](https://img.shields.io/badge/YouTube-Eat'sUhok%20서비스시연%20영상-FF0000?logo=youtube&logoColor=white)](https://www.youtube.com/watch?v=3ETDQL5bWG0)
 
 
+## 기여 Repo
+| Repo | Upstream | Description |
+| --- | --- | --- |
+| uhok-backend | 🔗 https://github.com/uhoks-sonata/uhok-backend.git | 프로젝트 백엔드(FastAPI) |
+| uhok-deploy | 🔗 https://github.com/uhoks-sonata/uhok-deploy.git | 배포 환경 구성(Docker/Nginx 등) |
+| uhok-ml-inference | 🔗 https://github.com/uhoks-sonata/uhok-ml-inference.git | 벡터 임베딩 및 유사도 검색(추론 API) |
+| payment-server | 🔗 https://github.com/khangte/payment-server.git | 외부 결제 연동 및 웹훅 수신 서버 |
+
+
+## 역할
+- 백엔드 API 설계·구현
+- MariaDB / PostgreSQL 기반 서비스 DB 설계 
+- 외부 결제 연동 및 웹훅 수신 서버 구현
+- ML 모델 서빙 연동 및 백엔드 추론 API 제공
+- JMeter 성능 테스트 및 개선
+- AWS EC2 기반 배포 환경 구성(Docker, Nginx)
+
+
 ## 개요
 
 **Eat's Uhok**은 U+ 콕 & 홈쇼핑을 기반하여 상호 연동하고 사용자 맞춤 식재료 및 레시피를 추천하는 서비스입니다.
@@ -11,19 +29,6 @@
 
 ## 프로젝트 기간
 2025.07.23 ~ 09.12 (발표 09.13)
-
-## 역할
-- 백엔드 API 설계·구현
-- MariaDB/ PostgreSQL 기반 서비스 DB 설계 
-- 외부 결제 연동 및 웹훅 수신 서버 구현
-- JMeter 성능 테스트 및 개선
-- AWS EC2 기반 배포 환경 구성(Docker, Nginx)
-
-## 담당 Repo
-- uhok-backend
-- uhok-deploy
-- uhok-ml-inference
-- payment-server
 
 
 ## 기술 스택
