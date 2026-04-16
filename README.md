@@ -90,7 +90,7 @@
 
 ## 클라우드 아키텍처
 
-![클라우드아키텍처](images/architecture/UhokCloundArchitecture_2.drawio.png)
+![클라우드아키텍처](images/architecture/UhokCloundArchitecture_renew.drawio.png)
 
 
 ## 수상 사진
