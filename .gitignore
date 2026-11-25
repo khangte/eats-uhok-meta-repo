@@ -1,2 +1,4 @@
 images/screenshots/
 *.bkp
+images/architecture/*.drawio
+!images/architecture/*.drawio.png

@@ -1,111 +1,207 @@
 # Eat’s 유혹(Uhok)
 
-[![YouTube](https://img.shields.io/badge/YouTube-Eat'sUhok%20서비스시연%20영상-FF0000?logo=youtube&logoColor=white)](https://www.youtube.com/watch?v=3ETDQL5bWG0)
+U+ 콕 쇼핑몰과 홈쇼핑을 연동해 사용자 맞춤 식재료와 레시피를 추천하는 서비스
 
+[![YouTube](https://img.shields.io/badge/YouTube-Eat'sUhok%20서비스시연%20영상-FF0000?logo=youtube&logoColor=white)](https://www.youtube.com/watch?v=3ETDQL5bWG0) [![Award](https://img.shields.io/badge/🏆%20LGU+%20WhyNot%20SW%20Camp-1위%20(LG유플러스상)-FFD700)](#수상)
 
-## 기여 Repo
-| Repo | Upstream | Description |
-| --- | --- | --- |
-| uhok-backend | 🔗 https://github.com/uhoks-sonata/uhok-backend.git | 프로젝트 백엔드(FastAPI) |
-| uhok-deploy | 🔗 https://github.com/uhoks-sonata/uhok-deploy.git | 배포 환경 구성(Docker/Nginx 등) |
-| uhok-ml-inference | 🔗 https://github.com/uhoks-sonata/uhok-ml-inference.git | 벡터 임베딩 및 유사도 검색(추론 API) |
-| payment-server | 🔗 https://github.com/khangte/payment-server.git | 외부 결제 연동 및 웹훅 수신 서버 |
+## 한눈에 보기
 
+| 항목 | 내용 |
+| --- | --- |
+| 기간 | 2025.07.23 ~ 09.12 (발표 09.13) |
+| 인원 | 6인 [![팀원 구성](https://img.shields.io/badge/팀원%20구성%20보기-555555)](#팀원-구성) |
+| 역할 | 백엔드, 결제 서버, ML 추론 서버 연동, 배포 |
+| 수상 | 1위 (LG유플러스상) / LGU+ WhyNot SW Camp 6기 최종 프로젝트 경진대회 [![수상](https://img.shields.io/badge/수상%20사진%20보기-555555)](#수상) |
 
-## 역할
-- 백엔드 API 설계·구현
-- MariaDB / PostgreSQL 기반 서비스 DB 설계 
-- 외부 결제 연동 및 웹훅 수신 서버 구현
-- ML 모델 서빙 연동 및 백엔드 추론 API 제공
-- JMeter 성능 테스트 및 개선
-- AWS EC2 기반 배포 환경 구성(Docker, Nginx)
-
-
-## 개요
+## 서비스 소개
 
 **Eat's Uhok**은 U+ 콕 & 홈쇼핑을 기반하여 상호 연동하고 사용자 맞춤 식재료 및 레시피를 추천하는 서비스입니다.
 
-![유혹스마트폰이미지](images/screenshots/스마트폰편집이미지.png)
+![유혹스마트폰이미지](images/스마트폰편집이미지.png)
 
-## 프로젝트 기간
-2025.07.23 ~ 09.12 (발표 09.13)
+- **쇼핑몰-홈쇼핑 연계 추천**: `U+콕 ↔ 홈쇼핑(U+TV)` 간 유사/대체 상품 자동 매칭, 찜/장바구니 기반 방송 알림
+- **레시피 기반 개인화 추천**: 키워드, 보유 재료, 시청 및 구매 이력 기반 레시피 추천과 필요한 식재료 즉시 구매 연결
+- **통합 검색**: 홈쇼핑 방송 상품과 U+콕 상품을 동시에 탐색, 시간대/카테고리/재료 필터링
+- **주문 및 결제**: 결제 서버를 통한 주문 처리, 결제 완료/실패 및 주문 상태(결제완료→배송중→배송완료) 자동 변경
+- **알림**: 방송 편성, 배송 상태 알림 데이터를 DB에 적재 (푸시 알림은 미구현)
 
+## 내 역할 및 기여
 
-## 기술 스택
+- 백엔드 API 설계 및 구현
+- 외부 결제 연동 및 웹훅 수신 서버 구현
+- ML 모델 서빙 연동 및 백엔드 추론 API 제공
+- MariaDB / PostgreSQL 기반 서비스 DB 설계
+- JMeter 기반 성능 테스트 및 성능 개선
+- AWS EC2 기반 배포 환경 구성(Docker, Nginx)
 
-#### 프론트엔드
-<img src="https://img.shields.io/badge/react-61DAFB?style=for-the-badge&logo=react&logoColor=white"> <img src="https://img.shields.io/badge/html5-E34F26?style=for-the-badge&logo=html5&logoColor=white"> <img src="https://img.shields.io/badge/css-663399?style=for-the-badge&logo=css&logoColor=white">
+| Repo | 한 일 | 상세 |
+| --- | --- | --- |
+| [uhok-backend](https://github.com/uhoks-sonata/uhok-backend.git) | 프로젝트 백엔드 (FastAPI) | [README](uhok-backend/README.md) |
+| [payment-server](https://github.com/khangte/payment-server.git) | 외부 결제 연동 및 웹훅 수신 서버 (FastAPI) | [README](payment-server/README.md) |
+| [uhok-ml-inference](https://github.com/uhoks-sonata/uhok-ml-inference.git) | 벡터 임베딩 및 유사도 검색 (추론 API) | [README](uhok-ml-inference/README.md) |
+| [uhok-deploy](https://github.com/uhoks-sonata/uhok-deploy.git) | 배포 환경 구성 (AWS EC2/Docker/Nginx) | [README](uhok-deploy/README.md) |
 
-#### 백엔드
-<img src="https://img.shields.io/badge/python-3776AB?style=for-the-badge&logo=python&logoColor=white"> <img src="https://img.shields.io/badge/fastapi-009688?style=for-the-badge&logo=fastapi&logoColor=white"> <img src="https://img.shields.io/badge/redis-DC382D?style=for-the-badge&logo=redis&logoColor=white"> <img src="https://img.shields.io/badge/sqlalchemy-D71F00?style=for-the-badge&logo=redis&logoColor=white"> 
+## 주요 문제 해결
 
-#### 데이터 수집
-<img src="https://img.shields.io/badge/Apache%20Airflow-017CEE?style=flat-square&logo=Apache%20Airflow&logoColor=white"> <img src="https://img.shields.io/badge/Requests-bada55?style=flat&logo=Python&logoColor=white"/><img src="https://img.shields.io/badge/BeautifulSoup4-d97453?style=flat&logo=Python&logoColor=white"/><img src="https://img.shields.io/badge/Playwright-afbb00?style=flat&logo=Python&logoColor=white"/> 
+### 1. 할인 상품 조회 N+1 쿼리 개선: p95 1,154 → 218ms
 
-#### 데이터베이스
-<img src="https://img.shields.io/badge/mariadb-003545?style=for-the-badge&logo=mariadb&logoColor=white"> <img src="https://img.shields.io/badge/postgresql-316192?style=for-the-badge&logo=postgresql&logoColor=white"> <img src="https://img.shields.io/badge/pgvector-336791?style=for-the-badge&logo=postgresql&logoColor=white"> <img src="https://img.shields.io/badge/Pymysql-fc7773?style=flat&logo=Python&logoColor=white"/><img src="https://img.shields.io/badge/Psycopg-ef9c89?style=flat&logo=Python&logoColor=white"/>
+- **문제**: 상품별 최신 가격 조회가 반복되는 1+2N 구조로 p95 1,154ms (목표 500ms 초과)
+- **해결**: `MAX(price_id) GROUP BY`로 최신 가격 ID를 집계한 뒤 조인하는 단일 쿼리로 변경, ASC 및 DESC 인덱스 비교 후 ASC 인덱스 적용
+- **결과**: p95 1,154→218ms, 평균 861→144ms, 처리량 22.0→104.9 req/s
 
-#### 분석 알고리즘
-<img src="https://img.shields.io/badge/sbert-336791?style=for-the-badge&logo=sbert&logoColor=white"> <img src="https://img.shields.io/badge/SentenceTransformer-92dc8d?style=flat&logo=Python&logoColor=white"/> <img src="https://img.shields.io/badge/LinearSVM-6de885?style=flat&logo=Python&logoColor=white"/>
+> 👉 [상세 보기](#problem-1)
 
-#### 배포
-<img src="https://img.shields.io/badge/nginx-009639?style=for-the-badge&logo=nginx&logoColor=white"> <img src="https://img.shields.io/badge/docker-2496ED?style=for-the-badge&logo=docker&logoColor=white"> <img src="https://img.shields.io/badge/amazonaws-232F3E?style=for-the-badge&logo=amazonaws&logoColor=white">
+### 2. 결제 상태 폴링을 웹훅으로 전환: 서버 간 호출 수 최대 93.5% 감소
 
+- **문제**: 5초 간격, 최대 30회 폴링으로 결제 1건당 상태 확인 최대 30회, 결제 완료 후에도 최대 5초 반영 지연
+- **해결**: 결제 서버가 결과를 백엔드로 직접 보내는 웹훅 방식으로 전환, `asyncio.Future`로 대기 중인 요청에 즉시 결과 전달
+- **결과**: 폴링 주기 지연 제거, 결제 1건당 서버 간 호출 최대 31회 → 2회
 
-## 기능
+> 👉 [상세 보기](#problem-2)
 
-### 홈쇼핑–쇼핑몰 연계 추천
-- `홈쇼핑(U+TV) ↔ U+콕 쇼핑` 간 유사/대체 상품 자동 매칭
-- 찜/장바구니 기반으로 방송 알림 제공
+### 3. ML 서비스 분리: 백엔드 이미지 9.98GB → 596MB
 
-### 레시피 기반 개인화 추천
-- 키워드/보유 재료/시청·구매 이력 기반 **맞춤형 레시피 추천**
-- 레시피에서 필요한 식재료 ↔ 즉시 구매 연결 
+- **문제**: 백엔드 이미지에 ML 의존성이 포함돼 9.98GB, 동기 임베딩 연산이 이벤트 루프를 점유해 다른 API 블로킹 위험
+- **해결**: 임베딩 및 유사도 검색을 별도 EC2의 ML 서비스로 분리하고 비동기 HTTP로 호출, 멀티스테이지 빌드 적용
+- **결과**: 이벤트 루프 블로킹 요인 제거, 백엔드 이미지 9.98GB→596MB, ML 이미지 9.43GB→1.91GB
 
-### 통합 검색 기능
-- `홈쇼핑 방송 상품` + `U+콕 쇼핑몰 상품`을 동시에 탐색  
-- 시간대/카테고리/재료 필터링 가능  
+> 👉 [상세 보기](#problem-3)
 
-#### 원스텝 쇼핑 경험
-- `방송 시청 → 레시피 확인 → 식재료 선택 → 즉시 구매`까지 한 흐름으로 연결  
+## 아키텍처
 
-### 주문 및 결제
-- 결제 서버를 통한 주문 처리
-- 자동 결제 완료/실패
-- 자동 주문 상태 변경(결제완료→배송중→배송완료)
-- 주문 상태 변경 알림
-
-### 방송 알림 ~~& 푸시 알림~~
-- 방송 편성 시 알림 ~~제공~~
-- 홈쇼핑 방송 알림, 배송 상태 알림 등의 알림 데이터는 DB에 적재하지만, 푸시 알림은 백엔드에서 미구현
-
-
-## ERD
-
-![ERD](images/architecture/ERD_image_white.png)
-
-## 시스템 아키텍쳐
+### 시스템 아키텍처
 
 ![시스템아키텍처 현재](images/architecture/SystemArchitecture_Real.png)
 
-## 클라우드 아키텍처
+### 클라우드 아키텍처
 
-![클라우드아키텍처](images/architecture/UhokCloundArchitecture_renew.drawio.png)
+![클라우드 아키텍처](images/architecture/UhokCloudArchitecture_merged.drawio.png)
 
+## 기술 스택
 
-## 수상 사진
+#### 백엔드
 
-> **LG유플러스상 (1위)** | LGU+WhyNotSWCamp 경진대회 (2025.09.13)
+<img src="https://img.shields.io/badge/python-3776AB?style=for-the-badge&logo=python&logoColor=white"> <img src="https://img.shields.io/badge/fastapi-009688?style=for-the-badge&logo=fastapi&logoColor=white"> <img src="https://img.shields.io/badge/redis-DC382D?style=for-the-badge&logo=redis&logoColor=white"> <img src="https://img.shields.io/badge/sqlalchemy-D71F00?style=for-the-badge&logo=sqlalchemy&logoColor=white"> 
+
+#### 대시보드
+
+<img src="https://shields.io/badge/streamlit-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white">
+
+#### 데이터베이스
+
+<img src="https://img.shields.io/badge/mariadb-003545?style=for-the-badge&logo=mariadb&logoColor=white"> <img src="https://img.shields.io/badge/postgresql-316192?style=for-the-badge&logo=postgresql&logoColor=white"> <img src="https://img.shields.io/badge/pgvector-336791?style=for-the-badge&logo=postgresql&logoColor=white">
+
+#### 배포
+
+<img src="https://img.shields.io/badge/nginx-009639?style=for-the-badge&logo=nginx&logoColor=white"> <img src="https://img.shields.io/badge/docker-2496ED?style=for-the-badge&logo=docker&logoColor=white"> <img src="https://img.shields.io/badge/amazonaws-232F3E?style=for-the-badge&logo=amazonaws&logoColor=white">
+
+## 한계
+
+- **로그 처리**: 로그 수집은 구현했지만, 수집한 로그를 분석하고 활용하는 처리 단계는 구현하지 못함
+- **DB 배포**: DB를 클라우드에 배포하지 않고 데스크탑 한 대에 띄워 운영함
+- **자동화 부족**: 배포를 수동으로 진행함
+- **보안**: AWS 보안 설정은 최소한으로만 적용했고, 서버 간 통신 보안까지는 충분히 신경 쓰지 못함
+
+## 문제 해결 상세
+
+<a id="problem-1"></a>
+
+### 1. 할인 상품 조회 N+1 쿼리 개선: p95 1,154 → 218ms
+
+**문제 정의**
+
+- 상품 목록 조회 후, 상품별로 최신 가격 ID 조회(N회)와 가격 상세 조회(N회)가 추가 발생하는 1+2N 구조로 인한 요청당 DB 호출 수 증가
+- 재측정에서 평균 응답 시간 861ms, p95 1,154ms, 최대 1,631ms로 자체 설정 p95 목표 500ms 초과
+
+**해결 과정**
+
+- MariaDB 10.11.13 환경에서 할인율 선별을 위한 `(discount_rate, product_id)`와 최신 가격 조회를 위한 `(product_id, price_id DESC)` 인덱스 사용
+- 1차 시도로 `ROW_NUMBER()` 윈도우 함수를 적용해, 상품별 최신 가격 row만 `rn=1`로 선별하는 단일 쿼리로 재구성
+- 상품마다 반복하던 최신 가격 ID 조회와 가격 상세 조회를 통합해 DB 호출 2N회 제거
+- `EXPLAIN`에서 임시 테이블(`Using temporary`) 사용과 파생 테이블 전체 스캔 확인. 상품별 최신 가격 1건만 필요한 조회에서도 여러 가격 이력에 순번을 매기고 중간 결과를 다시 읽어야 해 처리량 증가
+  - 부하 테스트에서 평균 응답 시간 9,546ms 기록
+- 2차 시도로 `MAX(price_id) GROUP BY product_id`로 상품별 최신 가격 ID를 먼저 집계하고, 해당 ID로 가격 상세 정보를 조인하는 방식으로 변경
+- 최신 가격 확정 후 할인율 필터를 적용해, 과거 할인 이력이 아닌 현재 할인 중인 상품만 선별
+- 변경된 조회에서 사용되지 않는 `(discount_rate, product_id)` 인덱스 제거
+- `MAX(price_id) GROUP BY product_id` 쿼리에서 가격 ID의 ASC 및 DESC 인덱스를 비교한 결과, ASC에서 `Using index for group-by` 확인
+- 인덱스별 실행 시간 비교: MariaDB 10.11.13에서 워밍업 1회 후 `ANALYZE` 각 3회 중앙값 (단위: ms)
+
+  | 최신 가격 인덱스 | 실행 시간 중앙값 |
+  | --- | ---: |
+  | `(product_id, price_id ASC)` | **21.42** |
+  | `(product_id, price_id DESC)` | 25.69 |
+
+- ASC에서 `Using index for group-by`와 더 짧은 실행 시간을 확인해 `(product_id, price_id ASC)` 인덱스 적용
+
+**결과**
+
+- JMeter 측정에서 초기 N+1 대비 MAX JOIN(ASC)의 평균 응답 시간 861→144ms, p95 1,154→218ms로 자체 목표 500ms 이내 달성
+- 비교 (각 4,000 samples, 오류율 0%)
+
+  | 구분 | 평균 응답 | p95 | 최대 | 처리량 |
+  | --- | ---: | ---: | ---: | ---: |
+  | 초기 (1+2N) | 861ms | 1,154ms | 1,631ms | 22.0 req/s |
+  | 1차 시도 (윈도우 함수) | 9,546ms | 10,922ms | 12,901ms | 2.1 req/s |
+  | 2차 시도 (MAX JOIN, DESC) | 198ms | 319ms | 440ms | 82.1 req/s |
+  | 2차 시도 (MAX JOIN, ASC) | **144ms** | **218ms** | **373ms** | **104.9 req/s** |
+
+---
+
+<a id="problem-2"></a>
+
+### 2. 결제 상태 폴링을 웹훅으로 전환: 서버 간 호출 수 최대 93.5% 감소
+
+**문제 정의**
+
+- "5초 간격 x 최대 30회" 결제 상태 폴링 구조로 결제 1건당 상태 확인 최대 30회 발생
+- 폴링 간 고정 대기만 최대 150초 누적되고, 여기에 개별 HTTP 요청 처리 시간이 더해짐
+- 폴링 대기 중 결제가 완료되어도 다음 상태 조회까지 반영되지 않아 최대 5초의 추가 대기 발생
+
+**해결 과정**
+
+- 결제 서버가 최종 결과를 백엔드 콜백 URL로 직접 전달하는 웹훅 방식으로 전환하고, 결제 요청마다 트랜잭션 ID를 키로 등록한 `asyncio.Future`를 웹훅 수신 시 즉시 완료시켜 대기 중인 요청에 결과 전달
+- 웹훅이 요청 측 구독보다 먼저 도착하는 경우를 대비해 최종 결과를 별도로 캐싱해두어 결과 유실 방지
+- 결제 서버의 웹훅 재시도가 백엔드의 60초 대기 이후까지 이어질 수 있어, 대기 타임아웃 시 주문을 결제 요청 상태로 유지하고 늦게 도착한 웹훅으로 최종 상태 확정
+- 재시도까지 모두 실패해 웹훅이 영구 유실되는 경우에 대비해, 5분 이상 결제 대기 상태로 남은 주문을 다음 결제 시도 시점에 감지해 자동 취소
+
+**결과**
+
+- 웹훅 수신 즉시 상태가 반영되어 최대 5초의 폴링 주기 지연 제거
+- 웹훅이 재시도 없이 1회에 성공하는 정상 케이스 기준, 결제 1건당 백엔드-결제 서버 간 총 호출이 최대 31회(결제 생성 1 + 상태 확인 30)에서 **2회**(결제 생성 1 + 웹훅 수신 1)로 줄어 최대 약 **93.5%** 감소
+
+---
+
+<a id="problem-3"></a>
+
+### 3. ML 서비스 분리: 백엔드 이미지 9.98GB → 596MB
+
+**문제 정의**
+
+- 백엔드 이미지에 `torch`, `sentence-transformers` 등 ML 의존성이 함께 포함돼 이미지 크기가 9.98GB에 달하고 빌드에도 오랜 시간 소요
+- 단일 Uvicorn 프로세스에서 추천 API의 `SentenceTransformer.encode()` 동기 호출이 이벤트 루프를 점유해, 연산이 끝날 때까지 같은 이벤트 루프의 다른 요청 처리가 지연될 수 있는 구조
+
+**해결 과정**
+
+- 백엔드 이미지에서 ML 의존성을 제거하고 동기 임베딩 연산의 이벤트 루프 블로킹을 해소하기 위해 ML 서비스 분리 결정
+- 추천 연산과 일반 API의 CPU 및 메모리 자원 경합 가능성도 고려해 별도 EC2 인스턴스에 배포
+- 임베딩 생성 로직을 ML 서비스로 옮기고 백엔드의 동기 `encode()` 호출을 비동기 HTTP 요청으로 교체해, 백엔드에서 `torch`, `sentence-transformers` 의존성 제거
+- ML 서비스는 모델을 CPU로 실행하도록 설정하고, `torch` 설치 시 CPU 휠 인덱스를 추가
+- 이미지에 남은 빌드 도구를 제외하기 위해 멀티스테이지 빌드를 적용하고, 실행 이미지에는 빌더에 설치한 의존성만 복사
+- Nginx로 외부 요청 진입점을 통합하고, 백엔드와 ML 서비스는 프라이빗 IP로 통신하도록 구성
+- 이후 백엔드에 남아 있던 `pgvector` 벡터 유사도 검색도 ML 서비스로 이전해, 백엔드는 검색된 레시피 ID와 거리 값을 응답받도록 변경
+
+**결과**
+
+- 백엔드의 동기 임베딩 호출을 비동기 HTTP 요청으로 대체해, 임베딩 연산에 의한 이벤트 루프 블로킹과 모델의 백엔드 메모리 점유 제거
+- 백엔드 이미지 9.98GB(torch GPU 포함) → 981MB(ML 컨테이너 분리 후 torch 제거) → **596MB**(멀티스테이지 빌드 적용)
+- ML 추론 서비스 이미지 9.43GB → **1.91GB**
+
+## 팀원 구성
+
+![팀원소개](images/팀원소개_3.png)
+
+## 수상
+
+> **1위 (LG유플러스상)** / LGU+ WhyNot SW Camp 6기 최종 프로젝트 경진대회 (2025.09.13)
 
 ![수상기념사진_편집1](images/수상사진_편집1.png)
-
-
-## 아쉬웠던 점
-
-- **로그 처리**
-
-- **DB 배포**  
-
-- **자동화 시스템 부족**
-
-- **보안**
