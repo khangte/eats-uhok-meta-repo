@@ -49,64 +49,8 @@ U+ 콕 쇼핑몰과 홈쇼핑을 연동해 사용자 맞춤 식재료와 레시�
 - **해결**: `MAX(price_id) GROUP BY`로 최신 가격 ID를 집계한 뒤 조인하는 단일 쿼리로 변경, ASC 및 DESC 인덱스 비교 후 ASC 인덱스 적용
 - **결과**: p95 1,154→218ms, 평균 861→144ms, 처리량 22.0→104.9 req/s
 
-> 👉 [상세 보기](#problem-1)
-
-### 2. 결제 상태 폴링을 웹훅으로 전환: 서버 간 호출 수 최대 93.5% 감소
-
-- **문제**: 5초 간격, 최대 30회 폴링으로 결제 1건당 상태 확인 최대 30회, 결제 완료 후에도 최대 5초 반영 지연
-- **해결**: 결제 서버가 결과를 백엔드로 직접 보내는 웹훅 방식으로 전환, `asyncio.Future`로 대기 중인 요청에 즉시 결과 전달
-- **결과**: 폴링 주기 지연 제거, 결제 1건당 서버 간 호출 최대 31회 → 2회
-
-> 👉 [상세 보기](#problem-2)
-
-### 3. ML 서비스 분리: 백엔드 이미지 9.98GB → 596MB
-
-- **문제**: 백엔드 이미지에 ML 의존성이 포함돼 9.98GB, 동기 임베딩 연산이 이벤트 루프를 점유해 다른 API 블로킹 위험
-- **해결**: 임베딩 및 유사도 검색을 별도 EC2의 ML 서비스로 분리하고 비동기 HTTP로 호출, 멀티스테이지 빌드 적용
-- **결과**: 이벤트 루프 블로킹 요인 제거, 백엔드 이미지 9.98GB→596MB, ML 이미지 9.43GB→1.91GB
-
-> 👉 [상세 보기](#problem-3)
-
-## 아키텍처
-
-### 시스템 아키텍처
-
-![시스템아키텍처 현재](images/architecture/SystemArchitecture_Real.png)
-
-### 클라우드 아키텍처
-
-![클라우드 아키텍처](images/architecture/UhokCloudArchitecture_merged.drawio.png)
-
-## 기술 스택
-
-#### 백엔드
-
-<img src="https://img.shields.io/badge/python-3776AB?style=for-the-badge&logo=python&logoColor=white"> <img src="https://img.shields.io/badge/fastapi-009688?style=for-the-badge&logo=fastapi&logoColor=white"> <img src="https://img.shields.io/badge/redis-DC382D?style=for-the-badge&logo=redis&logoColor=white"> <img src="https://img.shields.io/badge/sqlalchemy-D71F00?style=for-the-badge&logo=sqlalchemy&logoColor=white"> 
-
-#### 대시보드
-
-<img src="https://shields.io/badge/streamlit-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white">
-
-#### 데이터베이스
-
-<img src="https://img.shields.io/badge/mariadb-003545?style=for-the-badge&logo=mariadb&logoColor=white"> <img src="https://img.shields.io/badge/postgresql-316192?style=for-the-badge&logo=postgresql&logoColor=white"> <img src="https://img.shields.io/badge/pgvector-336791?style=for-the-badge&logo=postgresql&logoColor=white">
-
-#### 배포
-
-<img src="https://img.shields.io/badge/nginx-009639?style=for-the-badge&logo=nginx&logoColor=white"> <img src="https://img.shields.io/badge/docker-2496ED?style=for-the-badge&logo=docker&logoColor=white"> <img src="https://img.shields.io/badge/amazonaws-232F3E?style=for-the-badge&logo=amazonaws&logoColor=white">
-
-## 한계
-
-- **로그 처리**: 로그 수집은 구현했지만, 수집한 로그를 분석하고 활용하는 처리 단계는 구현하지 못함
-- **DB 배포**: DB를 클라우드에 배포하지 않고 데스크탑 한 대에 띄워 운영함
-- **자동화 부족**: 배포를 수동으로 진행함
-- **보안**: AWS 보안 설정은 최소한으로만 적용했고, 서버 간 통신 보안까지는 충분히 신경 쓰지 못함
-
-## 문제 해결 상세
-
-<a id="problem-1"></a>
-
-### 1. 할인 상품 조회 N+1 쿼리 개선: p95 1,154 → 218ms
+<details>
+<summary>상세 보기</summary>
 
 **문제 정의**
 
@@ -145,11 +89,18 @@ U+ 콕 쇼핑몰과 홈쇼핑을 연동해 사용자 맞춤 식재료와 레시�
   | 2차 시도 (MAX JOIN, DESC) | 198ms | 319ms | 440ms | 82.1 req/s |
   | 2차 시도 (MAX JOIN, ASC) | **144ms** | **218ms** | **373ms** | **104.9 req/s** |
 
+</details>
+
 ---
 
-<a id="problem-2"></a>
-
 ### 2. 결제 상태 폴링을 웹훅으로 전환: 서버 간 호출 수 최대 93.5% 감소
+
+- **문제**: 5초 간격, 최대 30회 폴링으로 결제 1건당 상태 확인 최대 30회, 결제 완료 후에도 최대 5초 반영 지연
+- **해결**: 결제 서버가 결과를 백엔드로 직접 보내는 웹훅 방식으로 전환, `asyncio.Future`로 대기 중인 요청에 즉시 결과 전달
+- **결과**: 폴링 주기 지연 제거, 결제 1건당 서버 간 호출 최대 31회 → 2회
+
+<details>
+<summary>상세 보기</summary>
 
 **문제 정의**
 
@@ -169,11 +120,18 @@ U+ 콕 쇼핑몰과 홈쇼핑을 연동해 사용자 맞춤 식재료와 레시�
 - 웹훅 수신 즉시 상태가 반영되어 최대 5초의 폴링 주기 지연 제거
 - 웹훅이 재시도 없이 1회에 성공하는 정상 케이스 기준, 결제 1건당 백엔드-결제 서버 간 총 호출이 최대 31회(결제 생성 1 + 상태 확인 30)에서 **2회**(결제 생성 1 + 웹훅 수신 1)로 줄어 최대 약 **93.5%** 감소
 
+</details>
+
 ---
 
-<a id="problem-3"></a>
-
 ### 3. ML 서비스 분리: 백엔드 이미지 9.98GB → 596MB
+
+- **문제**: 백엔드 이미지에 ML 의존성이 포함돼 9.98GB, 동기 임베딩 연산이 이벤트 루프를 점유해 다른 API 블로킹 위험
+- **해결**: 임베딩 및 유사도 검색을 별도 EC2의 ML 서비스로 분리하고 비동기 HTTP로 호출, 멀티스테이지 빌드 적용
+- **결과**: 이벤트 루프 블로킹 요인 제거, 백엔드 이미지 9.98GB→596MB, ML 이미지 9.43GB→1.91GB
+
+<details>
+<summary>상세 보기</summary>
 
 **문제 정의**
 
@@ -195,6 +153,43 @@ U+ 콕 쇼핑몰과 홈쇼핑을 연동해 사용자 맞춤 식재료와 레시�
 - 백엔드의 동기 임베딩 호출을 비동기 HTTP 요청으로 대체해, 임베딩 연산에 의한 이벤트 루프 블로킹과 모델의 백엔드 메모리 점유 제거
 - 백엔드 이미지 9.98GB(torch GPU 포함) → 981MB(ML 컨테이너 분리 후 torch 제거) → **596MB**(멀티스테이지 빌드 적용)
 - ML 추론 서비스 이미지 9.43GB → **1.91GB**
+
+</details>
+
+## 아키텍처
+
+### 시스템 아키텍처
+
+![시스템아키텍처 현재](images/architecture/SystemArchitecture_Real.png)
+
+### 클라우드 아키텍처
+
+![클라우드 아키텍처](images/architecture/UhokCloudArchitecture_merged.drawio.png)
+
+## 기술 스택
+
+#### 백엔드
+
+<img src="https://img.shields.io/badge/python-3776AB?style=for-the-badge&logo=python&logoColor=white"> <img src="https://img.shields.io/badge/fastapi-009688?style=for-the-badge&logo=fastapi&logoColor=white"> <img src="https://img.shields.io/badge/redis-DC382D?style=for-the-badge&logo=redis&logoColor=white"> <img src="https://img.shields.io/badge/sqlalchemy-D71F00?style=for-the-badge&logo=sqlalchemy&logoColor=white"> 
+
+#### 대시보드
+
+<img src="https://shields.io/badge/streamlit-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white">
+
+#### 데이터베이스
+
+<img src="https://img.shields.io/badge/mariadb-003545?style=for-the-badge&logo=mariadb&logoColor=white"> <img src="https://img.shields.io/badge/postgresql-316192?style=for-the-badge&logo=postgresql&logoColor=white"> <img src="https://img.shields.io/badge/pgvector-336791?style=for-the-badge&logo=postgresql&logoColor=white">
+
+#### 배포
+
+<img src="https://img.shields.io/badge/nginx-009639?style=for-the-badge&logo=nginx&logoColor=white"> <img src="https://img.shields.io/badge/docker-2496ED?style=for-the-badge&logo=docker&logoColor=white"> <img src="https://img.shields.io/badge/amazonaws-232F3E?style=for-the-badge&logo=amazonaws&logoColor=white">
+
+## 한계
+
+- **로그 처리**: 로그 수집은 구현했지만, 수집한 로그를 분석하고 활용하는 처리 단계는 구현하지 못함
+- **DB 배포**: DB를 클라우드에 배포하지 않고 데스크탑 한 대에 띄워 운영함
+- **자동화 부족**: 배포를 수동으로 진행함
+- **보안**: AWS 보안 설정은 최소한으로만 적용했고, 서버 간 통신 보안까지는 충분히 신경 쓰지 못함
 
 ## 팀원 구성
 
