@@ -56,6 +56,22 @@
 - `EXPLAIN`에서 임시 테이블(`Using temporary`) 사용과 파생 테이블 전체 스캔 확인. 상품별 최신 가격 1건만 필요한 조회에서도 여러 가격 이력에 순번을 매기고 중간 결과를 다시 읽어야 해 처리량 증가
   - 부하 테스트에서 평균 응답 시간 9,546ms 기록
 - 2차 시도로 `MAX(price_id) GROUP BY product_id`로 상품별 최신 가격 ID를 먼저 집계하고, 해당 ID로 가격 상세 정보를 조인하는 방식으로 변경
+
+  ```sql
+  SELECT p.product_id, ...,
+         pr.discount_rate, pr.discounted_price
+  FROM product p
+  JOIN (
+      SELECT product_id, MAX(price_id) AS latest_price_id
+      FROM price
+      GROUP BY product_id
+  ) latest ON p.product_id = latest.product_id
+  JOIN price pr ON pr.price_id = latest.latest_price_id
+  WHERE pr.discount_rate > 0
+  ORDER BY pr.discount_rate DESC
+  LIMIT :size OFFSET :offset;
+  ```
+
 - 최신 가격 확정 후 할인율 필터를 적용해, 과거 할인 이력이 아닌 현재 할인 중인 상품만 선별
 - 변경된 조회에서 사용되지 않는 `(discount_rate, product_id)` 인덱스 제거
 - `MAX(price_id) GROUP BY product_id` 쿼리에서 가격 ID의 ASC 및 DESC 인덱스를 비교한 결과, ASC에서 `Using index for group-by` 확인
@@ -103,6 +119,29 @@
 
 - 결제 서버가 최종 결과를 백엔드 콜백 URL로 직접 전달하는 웹훅 방식으로 전환하고, 결제 요청마다 트랜잭션 ID를 키로 등록한 `asyncio.Future`를 웹훅 수신 시 즉시 완료시켜 대기 중인 요청에 결과 전달
 - 웹훅이 요청 측 구독보다 먼저 도착하는 경우를 대비해 최종 결과를 별도로 캐싱해두어 결과 유실 방지
+
+  ```python
+  class WaiterRegistry:
+      async def subscribe(self, tx_id):
+          fut = asyncio.get_running_loop().create_future()
+          if tx_id in self.resolved:  # 웹훅 선도착 시 즉시 완료
+              fut.set_result(self.resolved[tx_id])
+          else:
+              self.waiters.setdefault(tx_id, []).append(fut)
+          return fut
+
+      async def resolve(self, tx_id, payload):  # 웹훅 수신 시 호출
+          self.resolved[tx_id] = payload
+          for fut in self.waiters.pop(tx_id, []):
+              if not fut.done():  # 타임아웃으로 취소된 Future 제외
+                  fut.set_result(payload)
+          ...
+
+  # 결제 요청 측
+  fut = await webhook_waiters.subscribe(tx_id)
+  result = await asyncio.wait_for(fut, timeout=60)
+  ```
+
 - 결제 서버의 웹훅 재시도가 백엔드의 60초 대기 이후까지 이어질 수 있어, 대기 타임아웃 시 주문을 결제 요청 상태로 유지하고 늦게 도착한 웹훅으로 최종 상태 확정
 - 재시도까지 모두 실패해 웹훅이 영구 유실되는 경우에 대비해, 5분 이상 결제 대기 상태로 남은 주문을 다음 결제 시도 시점에 감지해 자동 취소
 
